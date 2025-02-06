@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="min-h-screen bg-terracota-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-terracota-800 mb-8">Espace membre</h1>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Menu latéral -->
+            <div class="w-full md:w-64">
+                {% include 'account/_menu.html.twig' %}
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="flex-1">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-terracota-700">
+                            Ma liste de souhait
+                            <span class="text-terracota-500">({{ app.user.wishlists|length }})</span>
+                        </h2>
+                    </div>
+
+                    {% if app.user.wishlists|length > 0 %}
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {% for product in app.user.wishlists %}
+                        <div class="group relative">
+                            <a href="{{ path('app_product', { slug : product.slug } ) }}"
+                                class="block overflow-hidden rounded-lg">
+                                <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}"
+                                    class="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-105">
+                            </a>
+
+                            <div class="mt-4">
+                                <a href="{{ path('app_product', { slug : product.slug } ) }}"
+                                    class="block text-lg font-medium text-terracota-700 hover:text-terracota-600 transition-colors">
+                                    {{ product.name }}
+                                </a>
+                                <div class="mt-1 text-terracota-600">
+                                    {{ product.pricewt|price }}
+                                </div>
+                                <a href="{{ path('app_account_wishlist_remove', { id : product.id } ) }}"
+                                    class="mt-2 inline-block text-sm text-terracota-500 hover:text-terracota-700 transition-colors">
+                                    Supprimer
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="p-4 bg-terracota-50 border border-terracota-100 text-terracota-600 rounded-lg">
+                        Vous n'avez pas de produit dans votre liste de souhait.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

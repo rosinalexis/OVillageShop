@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="min-h-screen bg-terracota-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-terracota-800 mb-8">Espace membre</h1>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Menu latéral -->
+            <div class="w-full md:w-64">
+                {% include 'account/_menu.html.twig' %}
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="flex-1">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-terracota-700 mb-6">Modification de mon mot de passe</h2>
+
+                    {{ form_start(modifyPwd, {'attr': {'class': 'space-y-6'}}) }}
+
+                    <!-- Champ Mot de passe actuel -->
+                    <div>
+                        {{ form_label(modifyPwd.actualPassword, 'Mot de passe actuel', {
+                        'label_attr': {'class': 'block text-sm font-medium text-terracota-700 mb-1'}
+                        }) }}
+                        {{ form_widget(modifyPwd.actualPassword, {
+                        'attr': {
+                        'class': 'mt-1 block w-full rounded-md border-terracota-200 shadow-sm focus:border-terracota-500
+                        focus:ring-terracota-500',
+                        'autocomplete': 'current-password'
+                        }
+                        }) }}
+                        {{ form_errors(modifyPwd.actualPassword) }}
+                    </div>
+
+                    <!-- Champ Nouveau mot de passe -->
+                    <div>
+                        {{ form_label(modifyPwd.plainPassword.first, 'Nouveau mot de passe', {
+                        'label_attr': {'class': 'block text-sm font-medium text-terracota-700 mb-1'}
+                        }) }}
+                        {{ form_widget(modifyPwd.plainPassword.first, {
+                        'attr': {
+                        'class': 'mt-1 block w-full rounded-md border-terracota-200 shadow-sm focus:border-terracota-500
+                        focus:ring-terracota-500',
+                        'autocomplete': 'new-password'
+                        }
+                        }) }}
+                        {{ form_errors(modifyPwd.plainPassword.first) }}
+                    </div>
+
+                    <!-- Confirmation nouveau mot de passe -->
+                    <div>
+                        {{ form_label(modifyPwd.plainPassword.second, 'Confirmation du nouveau mot de passe', {
+                        'label_attr': {'class': 'block text-sm font-medium text-terracota-700 mb-1'}
+                        }) }}
+                        {{ form_widget(modifyPwd.plainPassword.second, {
+                        'attr': {
+                        'class': 'mt-1 block w-full rounded-md border-terracota-200 shadow-sm focus:border-terracota-500
+                        focus:ring-terracota-500',
+                        'autocomplete': 'new-password'
+                        }
+                        }) }}
+                        {{ form_errors(modifyPwd.plainPassword.second) }}
+                    </div>
+
+                    <!-- Champ CSRF -->
+                    {{ form_widget(modifyPwd._token) }}
+
+                    <!-- Bouton Submit -->
+                    <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-terracota-600 hover:bg-terracota-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-terracota-500 transition-colors">
+                        Modifier mon mot de passe
+                    </button>
+
+                    {{ form_end(modifyPwd, {'render_rest': false}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

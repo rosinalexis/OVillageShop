@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Village - 100% Made in Africa</title>
+    <meta name="description" content="L'artisanat africain authentique, fabriqué avec passion">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracota: {
+                            50: '#fdf6f3',
+                            100: '#fbece7',
+                            200: '#f6d5cc',
+                            300: '#e8a999',
+                            400: '#dc8266',
+                            500: '#d15a33',
+                            600: '#b34726',
+                            700: '#8f381f',
+                            800: '#6b2917',
+                            900: '#471a0f',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter var', 'system-ui', '-apple-system']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-terracota-50 font-sans antialiased">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <a href="{{ path('app_home') }}" class="flex items-center">
+                    <img src="{{ asset('assets/logo.jpg') }}" class="h-8 w-auto" alt="O Village Logo">
+                    <span class="ml-2 text-xl font-bold text-terracota-700">O Village</span>
+                </a>
+
+                <!-- Navigation Desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="{{ path('app_home') }}"
+                        class="text-gray-700 hover:text-terracota-600 transition-colors font-medium">Accueil</a>
+                    {% for category in allCategories %}
+                    <div class="relative group">
+                        <a href="{{ path('app_category', { slug : category.slug } ) }}"
+                            class="text-gray-700 hover:text-terracota-600 transition-colors font-medium">
+                            {{ category.name }}
+                        </a>
+                        <!-- Mega Menu (à compléter avec les sous-catégories) -->
+                        <div class="absolute hidden group-hover:block w-48 bg-white shadow-lg rounded-lg p-4">
+                            <!-- Sous-catégories ici -->
+                        </div>
+                    </div>
+                    {% endfor %}
+                </nav>
+
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    {% if app.user %}
+                    <div class="relative group">
+                        <a href="{{ path('app_account') }}"
+                            class="flex items-center text-gray-700 hover:text-terracota-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <span class="ml-1">{{ app.user.firstname }}</span>
+                        </a>
+                    </div>
+                    {% else %}
+                    <a href="{{ path('app_login') }}" class="text-gray-700 hover:text-terracota-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </a>
+                    {% endif %}
+
+                    <a href="{{ path('app_cart') }}" class="relative text-gray-700 hover:text-terracota-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        {% if fullCartQuantity > 0 %}
+                        <span
+                            class="absolute -top-2 -right-2 bg-terracota-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                            {{ fullCartQuantity }}
+                        </span>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="bg-terracota-100">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-terracota-800 sm:text-5xl md:text-6xl">
+                    L'artisanat africain <br>
+                    <span class="text-terracota-500">authentique</span>
+                </h1>
+                <p
+                    class="mt-3 max-w-md mx-auto text-base text-terracota-700 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                    Découvrez des créations uniques faites main par des artisans talentueux
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Flash Messages -->
+            {% for label, messages in app.flashes %}
+            {% for message in messages %}
+            <div class="mb-8 p-4 bg-terracota-100 border-l-4 border-terracota-500 text-terracota-700">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endfor %}
+
+            {% block body %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Newsletter -->
+    <section class="bg-terracota-800 text-terracota-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Restez connecté</h2>
+            <p class="text-terracota-200 mb-6">Recevez nos dernières nouveautés et offres spéciales</p>
+            <form class="max-w-md mx-auto flex gap-4">
+                <input type="email" placeholder="Votre email" class="flex-1 rounded-lg px-4 py-2 text-gray-900">
+                <button
+                    class="bg-terracota-500 hover:bg-terracota-600 text-white px-6 py-2 rounded-lg transition-colors">
+                    S'inscrire
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-terracota-900 text-terracota-100">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">O Village</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Notre histoire</a></li>
+                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                {% for category in allCategories|slice(0, 3) %}
+                <div>
+                    <h3 class="text-lg font-bold mb-4">{{ category.name }}</h3>
+                    <ul class="space-y-2">
+                        <!-- Sous-catégories ici -->
+                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Produits phares</a></li>
+                    </ul>
+                </div>
+                {% endfor %}
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-terracota-400 transition-colors">
+                            <i data-feather="facebook"></i>
+                        </a>
+                        <a href="#" class="hover:text-terracota-400 transition-colors">
+                            <i data-feather="instagram"></i>
+                        </a>
+                        <a href="#" class="hover:text-terracota-400 transition-colors">
+                            <i data-feather="youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-terracota-800 text-center">
+                <p>&copy; {{ "now"|date("Y") }} O Village - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace({ class: 'feather-icon' });
+    </script>
+</body>
+
+</html>

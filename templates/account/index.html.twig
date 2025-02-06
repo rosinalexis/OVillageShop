@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="min-h-screen bg-terracota-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-terracota-800 mb-8">Espace membre</h1>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Menu latéral -->
+            <div class="w-full md:w-64 shrink-0">
+                {% include 'account/_menu.html.twig' %}
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="flex-1">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-terracota-700 mb-6">Mes dernières commandes</h2>
+
+                    {% if orders|length == 0 %}
+                    <div class="p-4 bg-terracota-50 border border-terracota-100 text-terracota-600 rounded-lg">
+                        Vous n'avez passé aucune commande pour le moment.
+                    </div>
+                    {% else %}
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-terracota-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-terracota-700">N°</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-terracota-700">Date</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-terracota-700">Statut</th>
+                                    <th class="px-4 py-3 text-right text-sm font-semibold text-terracota-700">Total
+                                        T.T.C</th>
+                                    <th class="px-4 py-3"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-terracota-100">
+                                {% for order in orders %}
+                                <tr class="hover:bg-terracota-50 transition-colors">
+                                    <td class="px-4 py-3 text-sm text-terracota-600">{{ order.id }}</td>
+                                    <td class="px-4 py-3 text-sm text-terracota-600">{{ order.createdAt|date('d/m/Y') }}
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        {{ include('admin/state.html.twig', {
+                                        field: {
+                                        'value': order.state,
+                                        'attr': {
+                                        'class': 'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium'
+                                        }
+                                        }
+                                        }) }}
+                                    </td>
+                                    <td class="px-4 py-3 text-right text-sm font-medium text-terracota-700">
+                                        {{ order.totalWt|price }}
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}"
+                                            class="text-terracota-600 hover:text-terracota-700 transition-colors">
+                                            Voir le détail →
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

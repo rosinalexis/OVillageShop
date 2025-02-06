@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="min-h-screen bg-terracota-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-terracota-800 mb-8">Mon panier</h1>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Liste des produits -->
+            <div class="flex-1">
+                {% for product in cart %}
+                <div class="flex flex-col sm:flex-row items-center gap-4 bg-white rounded-lg p-4 mb-4 shadow-sm">
+                    <!-- Image -->
+                    <div class="w-24 flex-shrink-0">
+                        <img src="/uploads/{{ product.object.illustration }}" alt="{{ product.object.name }}"
+                            class="w-full h-24 object-cover rounded-lg">
+                    </div>
+
+                    <!-- Détails produit -->
+                    <div class="flex-1">
+                        <h3 class="font-medium text-terracota-700">{{ product.object.name }}</h3>
+                        <p class="text-sm text-terracota-500">Prix unitaire : {{ product.object.pricewt|price }}</p>
+                    </div>
+
+                    <!-- Quantité -->
+                    <div class="flex items-center gap-2">
+                        <a href="{{ path('app_cart_decrease', { id : product.object.id } ) }}"
+                            class="px-2 py-1 rounded-md bg-terracota-100 text-terracota-700 hover:bg-terracota-200 transition-colors">
+                            -
+                        </a>
+                        <span class="px-3 py-1 bg-terracota-50 rounded-md">{{ product.qty }}</span>
+                        <a href="{{ path('app_cart_add', { id : product.object.id } ) }}"
+                            class="px-2 py-1 rounded-md bg-terracota-100 text-terracota-700 hover:bg-terracota-200 transition-colors">
+                            +
+                        </a>
+                    </div>
+
+                    <!-- Prix total -->
+                    <div class="text-right font-medium text-terracota-700 min-w-[100px]">
+                        {{ (product.qty * product.object.pricewt)|price }}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <a href="{{ path('app_cart_remove') }}"
+                    class="inline-block mt-4 text-sm text-terracota-600 hover:text-terracota-700 transition-colors">
+                    Vider le panier
+                </a>
+            </div>
+
+            <!-- Récapitulatif -->
+            <div class="lg:w-96">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-lg font-semibold text-terracota-700 mb-4">Récapitulatif</h2>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-terracota-600">Articles</span>
+                            <span class="font-medium text-terracota-700">{{ fullCartQuantity }}</span>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <span class="text-terracota-600">Total TTC</span>
+                            <span class="text-xl font-bold text-terracota-700">{{ totalWt|price }}</span>
+                        </div>
+                    </div>
+
+                    <a href="{{ path('app_order') }}"
+                        class="mt-6 w-full flex justify-center items-center py-3 px-4 bg-terracota-600 hover:bg-terracota-700 text-white rounded-lg transition-colors">
+                        Passer la commande
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

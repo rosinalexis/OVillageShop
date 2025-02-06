@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="min-h-screen bg-terracota-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-terracota-800 mb-8">Espace membre</h1>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Menu latéral -->
+            <div class="w-full md:w-64">
+                {% include 'account/_menu.html.twig' %}
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="flex-1">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <!-- En-tête -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h2 class="text-xl font-semibold text-terracota-700">Mes adresses</h2>
+                        <a href="{{ path('app_account_address_form') }}"
+                            class="inline-flex items-center px-4 py-2 bg-terracota-600 hover:bg-terracota-700 text-white rounded-lg transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            Ajouter une adresse
+                        </a>
+                    </div>
+
+                    {% if app.user.addresses|length == 0 %}
+                    <div class="p-4 bg-terracota-100 border border-terracota-200 text-terracota-700 rounded-lg">
+                        Vous n'avez pas encore enregistré d'adresse.
+                    </div>
+                    {% else %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {% for address in app.user.addresses %}
+                        <div
+                            class="bg-white border border-terracota-100 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="space-y-2">
+                                <h3 class="font-medium text-terracota-700">
+                                    {{ address.firstname }} {{ address.lastname }}
+                                </h3>
+                                <div class="text-sm text-terracota-600">
+                                    <p>{{ address.address }}</p>
+                                    <p>{{ address.postal }} {{ address.city }}</p>
+                                    <p>{{ address.country }}</p>
+                                </div>
+                                <div class="flex gap-3 mt-3">
+                                    <a href="{{ path('app_account_address_form', { id : address.id } ) }}"
+                                        class="text-sm text-terracota-600 hover:text-terracota-700 transition-colors">
+                                        ✏️ Éditer
+                                    </a>
+                                    <a href="{{ path('app_account_address_delete', { id : address.id } ) }}"
+                                        class="text-sm text-terracota-600 hover:text-red-600 transition-colors">
+                                        🗑 Supprimer
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

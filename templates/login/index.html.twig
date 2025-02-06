@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="bg-terracota-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md mx-auto space-y-8">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-terracota-800">Connexion</h1>
+            <p class="mt-2 text-sm text-terracota-600">
+                Accédez à votre espace personnel
+            </p>
+        </div>
+
+        {% if error %}
+        <div class="p-4 bg-terracota-100 border border-terracota-200 text-terracota-700 rounded-lg">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+        {% endif %}
+
+        <form class="mt-8 space-y-6" action="{{ path('app_login') }}" method="post">
+            <div class="rounded-md shadow-sm space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-terracota-700">Adresse email</label>
+                    <input type="email" id="username" name="_username" value="{{ last_username }}" required
+                        class="mt-1 block w-full rounded-md border-terracota-200 shadow-sm focus:border-terracota-500 focus:ring-terracota-500">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-terracota-700">Mot de passe</label>
+                    <input type="password" id="password" name="_password" required
+                        class="mt-1 block w-full rounded-md border-terracota-200 shadow-sm focus:border-terracota-500 focus:ring-terracota-500">
+                </div>
+            </div>
+
+            <input type="hidden" name="_target_path" value="{{ path('app_account') }}">
+
+            <button type="submit"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-terracota-600 hover:bg-terracota-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-terracota-500 transition-colors">
+                Se connecter
+            </button>
+        </form>
+
+        <div class="mt-6 text-center space-y-3">
+            <p class="text-sm text-terracota-600">
+                Pas encore de compte ?
+                <a href="{{ path('app_register') }}" class="font-medium text-terracota-700 hover:text-terracota-600">
+                    Créer un compte
+                </a>
+            </p>
+            <a href="{{ path('app_password') }}"
+                class="text-sm font-medium text-terracota-700 hover:text-terracota-600">
+                Mot de passe oublié ?
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
