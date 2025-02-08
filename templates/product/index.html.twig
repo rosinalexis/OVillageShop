@@ -1,48 +1,87 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <div class="container my-5">
-
-        <div class="row">
-            <div class="col-md-6">
-                <img src="/uploads/{{ product.illustration }}" class="img-fluid" alt="{{ product.name }}">
+<div class="min-h-screen bg-terracota-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Image produit -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}"
+                    class="w-full h-full object-cover">
             </div>
-            <div class="col-md-6">
-                <small><i><a href="{{ path('app_category', { slug : product.category.slug } ) }}">{{ product.category.name }}</a> > {{ product.name }}</i></small>
-                <h1>{{ product.name }}</h1>
-                <span class="d-block mb-3">{{ product.pricewt|price }}</span>
-                {{ product.description|raw }}
-                <div class="d-flex align-items-center justify-content-between mt-3">
-                    <a href="{{ path('app_cart_add', { id : product.id } ) }}" class="btn btn-success w-100">Ajouter au panier</a>
 
-                    {% if app.user %}
-                        {% if product in app.user.wishlists %}
-                            <a class="wishlist-icon wishlist-icon-active" href="{{ path('app_account_wishlist_remove', { id : product.id } ) }}" style="margin-left: 10px;">
-                                <i data-feather="heart"></i>
-                            </a>
-                        {% else %}
-                            <a class="wishlist-icon" href="{{ path('app_account_wishlist_add', { id : product.id } ) }}" style="margin-left: 10px;">
-                                <i data-feather="heart"></i>
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin-left: 10px;">
-                            <i data-feather="heart"></i>
-                        </a>
-                    {% endif %}
+            <!-- Détails produit -->
+            <div class="space-y-6">
+                <!-- Fil d'ariane -->
+                <div class="text-sm text-terracota-500">
+                    <a href="{{ path('app_category', { slug : product.category.slug } ) }}"
+                        class="hover:text-terracota-600 transition-colors">
+                        {{ product.category.name }}
+                    </a>
+                    <span class="mx-1">/</span>
+                    <span>{{ product.name }}</span>
                 </div>
 
-                <div class="collapse" id="collapseExample">
-                    <div class="mt-2">
-                        Pour utiliser les avantages de la Wishlist, <a href="{{ path('app_login') }}">connectez-vous</a> ou <a href="{{ path('app_register') }}">créez votre compte</a> client.
+                <!-- Titre et prix -->
+                <h1 class="text-3xl font-bold text-terracota-800">{{ product.name }}</h1>
+                <div class="text-2xl font-medium text-terracota-600">
+                    {{ product.pricewt|price }}
+                </div>
+
+                <!-- Description -->
+                <div class="prose text-terracota-600">
+                    {{ product.description|raw }}
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-4">
+                    <!-- Bouton ajouter au panier -->
+                    <a href="{{ path('app_cart_add', { id : product.id } ) }}"
+                        class="flex-1 flex justify-center items-center py-3 px-6 bg-terracota-600 hover:bg-terracota-700 text-white rounded-lg transition-colors">
+                        Ajouter au panier
+                    </a>
+
+                    <!-- Wishlist -->
+                    <div class="relative">
+                        {% if app.user %}
+                        {% if product in app.user.wishlists %}
+                        <a href="{{ path('app_account_wishlist_remove', { id : product.id } ) }}"
+                            class="w-12 h-12 flex items-center justify-center bg-terracota-100 text-terracota-600 rounded-lg hover:bg-terracota-200 transition-colors">
+                            <i data-feather="heart" class="w-5 h-5 fill-current text-terracota-600"></i>
+                        </a>
+                        {% else %}
+                        <a href="{{ path('app_account_wishlist_add', { id : product.id } ) }}"
+                            class="w-12 h-12 flex items-center justify-center bg-terracota-100 text-terracota-600 rounded-lg hover:bg-terracota-200 transition-colors">
+                            <i data-feather="heart" class="w-5 h-5"></i>
+                        </a>
+                        {% endif %}
+                        {% else %}
+                        <button type="button" @click="showWishlistAlert = true"
+                            class="w-12 h-12 flex items-center justify-center bg-terracota-100 text-terracota-600 rounded-lg hover:bg-terracota-200 transition-colors">
+                            <i data-feather="heart" class="w-5 h-5"></i>
+                        </button>
+
+                        <!-- Alert Wishlist -->
+                        <div x-show="showWishlistAlert" x-transition
+                            class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg p-4 border border-terracota-100">
+                            <p class="text-sm text-terracota-600">
+                                Pour utiliser la Wishlist,
+                                <a href="{{ path('app_login') }}"
+                                    class="text-terracota-700 hover:text-terracota-600">connectez-vous</a>
+                                ou
+                                <a href="{{ path('app_register') }}"
+                                    class="text-terracota-700 hover:text-terracota-600">créez un compte</a>.
+                            </p>
+                            <button @click="showWishlistAlert = false"
+                                class="absolute top-2 right-2 text-terracota-500 hover:text-terracota-700">
+                                <i data-feather="x" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
-
-
             </div>
         </div>
-
     </div>
-
+</div>
 {% endblock %}

@@ -43,13 +43,14 @@
 <!-- Featured Products -->
 <section class="py-16 bg-terracota-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center text-terracota-800 mb-12">Nos créations phares</h2>
+        <h2 class="text-3xl font-bold text-center text-terracota-800 mb-12">Nos produits phares</h2>
 
         <div class="grid md:grid-cols-3 gap-8">
             {% for product in productsInHomepage %}
             <div class="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                 <div class="aspect-square overflow-hidden rounded-t-xl">
-                    <img src="/uploads/{{ product.illustration }}"
+                    <!-- <img src="/uploads/{{ product.illustration }}" -->
+                    <img src="{{ product.illustration }}"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform"
                         alt="{{ product.name }}">
                 </div>
@@ -74,41 +75,42 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         <div class="flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2">
-                <img src="path/to/artisan-image.jpg" class="w-full h-96 object-cover rounded-xl shadow-lg"
+                <img src="https://placehold.co/600x400" class="w-full h-96 object-cover rounded-xl shadow-lg"
                     alt="Artisanat local">
             </div>
             <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Savoir-faire artisanal</h2>
+                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Saveurs d’Afrique</h2>
                 <p class="text-lg text-terracota-600 leading-relaxed">
-                    Découvrez les techniques ancestrales transmises de génération en génération par nos artisans
-                    passionnés.
+                    Découvrez des produits authentiques issus de savoir-faire traditionnels, transmis de génération en
+                    génération pour une cuisine riche en goûts et en émotions.
                 </p>
             </div>
         </div>
 
         <div class="flex flex-col md:flex-row-reverse items-center gap-12">
             <div class="md:w-1/2">
-                <img src="path/to/materials-image.jpg" class="w-full h-96 object-cover rounded-xl shadow-lg"
+                <img src="https://placehold.co/600x400" class="w-full h-96 object-cover rounded-xl shadow-lg"
                     alt="Matériaux naturels">
             </div>
             <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Matériaux 100% naturels</h2>
+                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Ingrédients 100% naturels</h2>
                 <p class="text-lg text-terracota-600 leading-relaxed">
-                    Des matières premières locales et durables, sélectionnées avec soin pour leur qualité et leur
-                    authenticité.
+                    Des produits africains sélectionnés avec soin, cultivés dans le respect des traditions pour
+                    préserver toute leur richesse et leur saveur.
                 </p>
             </div>
         </div>
 
         <div class="flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2">
-                <img src="path/to/community-image.jpg" class="w-full h-96 object-cover rounded-xl shadow-lg"
+                <img src="https://placehold.co/600x400" class="w-full h-96 object-cover rounded-xl shadow-lg"
                     alt="Communauté">
             </div>
             <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Une communauté engagée</h2>
+                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Un savoir-faire préservé</h2>
                 <p class="text-lg text-terracota-600 leading-relaxed">
-                    Rejoignez un mouvement qui valorise le travail équitable et préserve les traditions culturelles.
+                    Encouragez une agriculture et une production respectueuses, héritées des traditions africaines et
+                    transmises avec passion.
                 </p>
             </div>
         </div>

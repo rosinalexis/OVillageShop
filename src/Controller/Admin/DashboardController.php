@@ -27,17 +27,17 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Laboutiquefrancaise');
+            ->setTitle('O Village\'Shop');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
-        yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
-        yield MenuItem::linkToCrud('Produits', 'fas fa-list', Product::class);
-        yield MenuItem::linkToCrud('Transporteurs', 'fas fa-list', Carrier::class);
-        yield MenuItem::linkToCrud('Commandes', 'fas fa-list', Order::class);
-        yield MenuItem::linkToCrud('Header', 'fas fa-list', Header::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-layer-group', Category::class);
+        yield MenuItem::linkToCrud('Produits', 'fas fa-apple-whole', Product::class);
+        yield MenuItem::linkToCrud('Transporteurs', 'fas fa-truck', Carrier::class);
+        yield MenuItem::linkToCrud('Commandes', 'fas fa-boxes-packing', Order::class);
+        yield MenuItem::linkToCrud('Header', 'fas fa-newspaper', Header::class);
     }
 }

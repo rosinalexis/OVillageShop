@@ -1,73 +1,87 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="min-h-screen bg-terracota-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-terracota-800 mb-8">Récapitulatif de ma commande</h1>
 
-<div class="container my-5">
-    <h1>Récapitulatif de ma commande</h1>
-
-    <div class="row">
-
-        <div class="col-md-8">
-
-            <div class="bg-light p-3">
-                <strong>Contenu de mon panier</strong><br />
-                {% for product in cart %}
-                <div class="row mt-2">
-                    <div class="col-md-2">
-                        <img src="/uploads/{{ product.object.illustration }}" class="img-fluid"
-                            alt="{{ product.object.name }}">
-                    </div>
-                    <div class="col-md-6">
-                        <strong>{{ product.object.name }}</strong>
-                        <span class="d-block small">Prix unitaire : {{ product.object.pricewt|price }}</span>
-                    </div>
-                    <div class="col-md-2 text-right">
-                        <span class="badge text-bg-secondary">x{{ product.qty }}</span>
-                    </div>
-                    <div class="col-md-2">
-                        <strong>{{ (product.qty * product.object.pricewt)|price }}</strong>
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Détails de la commande -->
+            <div class="flex-1 space-y-6">
+                <!-- Contenu du panier -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-terracota-700 mb-4">Contenu du panier</h2>
+                    <div class="space-y-4">
+                        {% for product in cart %}
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 flex-shrink-0">
+                                <img src="/uploads/{{ product.object.illustration }}" alt="{{ product.object.name }}"
+                                    class="w-full h-16 object-cover rounded-lg">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-terracota-700">{{ product.object.name }}</h3>
+                                <p class="text-sm text-terracota-500">{{ product.object.pricewt|price }} / unité</p>
+                            </div>
+                            <div class="text-sm text-terracota-600">x{{ product.qty }}</div>
+                            <div class="font-medium text-terracota-700 min-w-[80px] text-right">
+                                {{ (product.qty * product.object.pricewt)|price }}
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
-                {% endfor %}
+
+                <!-- Adresse de livraison -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-terracota-700 mb-4">Adresse de livraison</h2>
+                    <div class="text-terracota-600">
+                        <p>{{ choices.addresses.firstname }} {{ choices.addresses.lastname }}</p>
+                        <p>{{ choices.addresses.address }}</p>
+                        <p>{{ choices.addresses.city }} - {{ choices.addresses.country }}</p>
+                    </div>
+                </div>
+
+                <!-- Transporteur -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-terracota-700 mb-4">Transporteur</h2>
+                    <div class="text-terracota-600">
+                        <p class="font-medium">{{ choices.carriers.name }}</p>
+                        <p class="text-sm">{{ choices.carriers.description }}</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="bg-light p-3 my-3">
-                <strong>Votre adresse de livraison :</strong><br />
-                {{ choices.addresses.firstname }} {{ choices.addresses.lastname }}<br />
-                {{ choices.addresses.address }}<br />
-                {{ choices.addresses.city }} - {{ choices.addresses.country }}
-            </div>git commit -m "first commit"
+            <!-- Récapitulatif et paiement -->
+            <div class="lg:w-96">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-terracota-700 mb-6">Total de la commande</h2>
 
-            <div class="bg-light p-3">
-                <strong>Votre transporteur :</strong><br />
-                {{ choices.carriers.name }}<br />
-                {{ choices.carriers.description }}
-            </div>
-        </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-terracota-600">Produits</span>
+                            <span class="font-medium text-terracota-700">{{ fullCartQuantity }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-terracota-600">Transport</span>
+                            <span class="font-medium text-terracota-700">{{ choices.carriers.price|price }}</span>
+                        </div>
+                        <div class="border-t border-terracota-100 pt-3">
+                            <div class="flex justify-between">
+                                <span class="text-lg font-bold text-terracota-800">Total</span>
+                                <span class="text-lg font-bold text-terracota-800">
+                                    {{ (totalWt + choices.carriers.price)|price }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="col-md-4">
-            <div class="bg-light p-3">
-                <div class="d-flex justify-content-between">
-                    <span class="fw-bold">Total produit</span>
-                    <span>{{ fullCartQuantity }}</span>
-                </div>
-                <div class="d-flex justify-content-between mt-3">
-                    <span class="fw-bold">Total transporteur</span>
-                    <span>{{ choices.carriers.price|price }}</span>
-                </div>
-                <div class="d-flex justify-content-between mt-3">
-                    <span class="fw-bold">Total commande</span>
-                    <span>{{ (totalWt + choices.carriers.price)|price }}</span>
-                </div>
-                <div>
                     <a href="{{ path('app_payment', { 'id_order' : order.id }) }}"
-                        class="btn btn-success w-100 mt-3">Payer</a>
+                        class="mt-6 w-full flex justify-center items-center py-3 px-4 bg-terracota-600 hover:bg-terracota-700 text-white rounded-lg transition-colors">
+                        Payer la commande
+                    </a>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}

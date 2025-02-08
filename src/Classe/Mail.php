@@ -10,12 +10,12 @@ class Mail
     public function send($to_email, $to_name, $subject, $template, $vars = null)
     {
         // Récupération du template
-        $content = file_get_contents(dirname(__DIR__).'/Mail/'.$template);
+        $content = file_get_contents(dirname(__DIR__) . '/Mail/' . $template);
 
         // Récupère les variables facultatives
         if ($vars) {
-            foreach($vars as $key=>$var) {
-                $content = str_replace('{'.$key.'}', $var, $content);
+            foreach ($vars as $key => $var) {
+                $content = str_replace('{' . $key . '}', $var, $content);
             }
         }
 
@@ -24,8 +24,8 @@ class Mail
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "laboutiquefrancaise75@gmail.com",
-                        'Name' => "La Boutique Française"
+                        'Email' => "ovillage@gmail.com",
+                        'Name' => "O Village Shop"
                     ],
                     'To' => [
                         [

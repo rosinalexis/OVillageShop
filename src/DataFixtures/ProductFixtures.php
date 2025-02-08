@@ -23,7 +23,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             [
                 'name' => 'Riz Basmati',
                 'description' => 'Un riz parfumé et léger, idéal pour accompagner vos plats africains.',
-                'illustration' => 'https://example.com/riz-basmati.jpg',
+                'illustration' => 'https://placehold.co/600x400?text=riz-basmati.jpg',
                 'price' => 5000,
                 'tva' => 10,
                 'category' => 0,
@@ -32,7 +32,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             [
                 'name' => 'Mil (Petit mil)',
                 'description' => 'Une céréale nutritive consommée dans toute l\'Afrique de l\'Ouest.',
-                'illustration' => 'https://example.com/mil.jpg',
+                'illustration' => 'https://placehold.co/600x400?text=mil.jpg',
                 'price' => 3500,
                 'tva' => 5,
                 'category' => 0,
@@ -41,7 +41,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             [
                 'name' => 'Poisson Séché (Capitaine)',
                 'description' => 'Poisson séché traditionnellement utilisé pour les sauces et soupes.',
-                'illustration' => 'https://example.com/poisson-seche.jpg',
+                'illustration' => 'https://placehold.co/600x400?text=poisson-seche.jpg',
                 'price' => 7000,
                 'tva' => 20,
                 'category' => 1,
@@ -50,7 +50,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             [
                 'name' => 'Jus de Bissap',
                 'description' => 'Boisson rafraîchissante à base de fleurs d\'hibiscus.',
-                'illustration' => 'https://example.com/bissap.jpg',
+                'illustration' => 'https://placehold.co/600x400?text=bissap.jpg',
                 'price' => 1200,
                 'tva' => 5,
                 'category' => 3,
@@ -59,7 +59,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             [
                 'name' => 'Chocolat Artisanal Africain',
                 'description' => 'Chocolat fait à partir de fèves de cacao africaines, 100% naturel.',
-                'illustration' => 'https://example.com/chocolat-africain.jpg',
+                'illustration' => 'https://placehold.co/600x400?text=chocolat-africain.jpg',
                 'price' => 2500,
                 'tva' => 5,
                 'category' => 4,

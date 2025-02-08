@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Village - 100% Made in Africa</title>
+    <title>O Village Shop - 100% Made in Africa</title>
     <meta name="description" content="L'artisanat africain authentique, fabriqué avec passion">
+    <meta property="og:title" content="O Village Shop - 100% Made in Africa">
+    <meta property="og:description" content="L'artisanat africain authentique, fabriqué avec passion">
+    <meta property="og:image" content="{{ asset('assets/logo.jpg') }}">
+    <link rel="canonical" href="{{ app.request.uri }}" />
+    <link rel="icon" href="{{ asset('assets/logo.jpg') }}" type="image/x-icon">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,8 +48,8 @@
             <div class="flex justify-between h-16 items-center">
                 <!-- Logo -->
                 <a href="{{ path('app_home') }}" class="flex items-center">
-                    <img src="{{ asset('assets/logo.jpg') }}" class="h-8 w-auto" alt="O Village Logo">
-                    <span class="ml-2 text-xl font-bold text-terracota-700">O Village</span>
+                    <img src="{{ asset('assets/logo.jpg') }}" class="h-8 w-auto" alt="O Village Shop Logo">
+                    <span class="ml-2 text-xl font-bold text-terracota-700">O Village Shop</span>
                 </a>
 
                 <!-- Navigation Desktop -->
@@ -109,12 +114,12 @@
         <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-4xl font-extrabold text-terracota-800 sm:text-5xl md:text-6xl">
-                    L'artisanat africain <br>
-                    <span class="text-terracota-500">authentique</span>
+                    Les saveurs authentiques <br>
+                    <span class="text-terracota-500">d’Afrique, livrées chez vous.</span>
                 </h1>
                 <p
                     class="mt-3 max-w-md mx-auto text-base text-terracota-700 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                    Découvrez des créations uniques faites main par des artisans talentueux
+                    L’épicerie africaine qui vous rapproche de chez vous.
                 </p>
             </div>
         </div>
