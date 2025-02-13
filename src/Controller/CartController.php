@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-    #[Route('/mon-panier/{motif}', name: 'app_cart', defaults: [ 'motif' => null ])]
+    #[Route('/mon-panier/{motif}', name: 'app_cart', defaults: ['motif' => null])]
     public function index(Cart $cart, $motif): Response
     {
         if ($motif == "annulation") {
@@ -46,6 +46,7 @@ class CartController extends AbstractController
     #[Route('/cart/decrease/{id}', name: 'app_cart_decrease')]
     public function decrease($id, Cart $cart): Response
     {
+        #tess
         $cart->decrease($id);
 
         $this->addFlash(
