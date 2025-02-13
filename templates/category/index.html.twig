@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="min-h-screen bg-terracota-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-terracota-50 py-8 relative overflow-hidden">
+    <!-- Image de fond -->
+    <div class="absolute inset-0 bg-no-repeat bg-center opacity-20" style="background-image: url('/assets/logo-4.png'); 
+                background-size: 15rem;">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <!-- En-tête de catégorie -->
         <div class="mb-8 text-center">
             <h1 class="text-4xl font-bold text-terracota-800">{{ category.name }}</h1>
@@ -18,7 +23,6 @@
                 class="group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
                 <!-- Image du produit -->
                 <div class="aspect-square overflow-hidden">
-                    <!-- <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" -->
                     <img src="{{ product.illustration }}" alt="{{ product.name }}"
                         class="w-full h-full object-cover transform transition-transform group-hover:scale-105">
                 </div>

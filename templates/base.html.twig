@@ -42,164 +42,176 @@
 </head>
 
 <body class="bg-terracota-50 font-sans antialiased">
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <!-- Logo -->
-                <a href="{{ path('app_home') }}" class="flex items-center">
-                    <img src="{{ asset('assets/logo.jpg') }}" class="h-8 w-auto" alt="O Village Shop Logo">
-                    <span class="ml-2 text-xl font-bold text-terracota-700">O Village Shop</span>
-                </a>
+    <!-- Barre latérale -->
+    <div class="fixed left-0 top-0 bottom-0 w-16 bg-terracota-700 bg-repeat-y bg-center z-50 sidebar-pattern hidden md:block"
+        style="background-image: url('/assets/y.png');">
+    </div>
+    <div class="ml-0 md:ml-16">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <!-- Logo -->
+                    <a href="{{ path('app_home') }}" class="flex items-center">
+                        <img src="{{ asset('assets/logo.jpg') }}" class="h-8 w-auto" alt="O Village Shop Logo">
+                        <span class="ml-2 text-xl font-bold text-terracota-700">O Village Shop</span>
+                    </a>
 
-                <!-- Navigation Desktop -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="{{ path('app_home') }}"
-                        class="text-gray-700 hover:text-terracota-600 transition-colors font-medium">Accueil</a>
-                    {% for category in allCategories %}
-                    <div class="relative group">
-                        <a href="{{ path('app_category', { slug : category.slug } ) }}"
-                            class="text-gray-700 hover:text-terracota-600 transition-colors font-medium">
-                            {{ category.name }}
-                        </a>
-                        <!-- Mega Menu (à compléter avec les sous-catégories) -->
-                        <div class="absolute hidden group-hover:block w-48 bg-white shadow-lg rounded-lg p-4">
-                            <!-- Sous-catégories ici -->
+                    <!-- Navigation Desktop -->
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="{{ path('app_home') }}"
+                            class="text-gray-700 hover:text-terracota-600 transition-colors font-medium">Accueil</a>
+                        {% for category in allCategories %}
+                        <div class="relative group">
+                            <a href="{{ path('app_category', { slug : category.slug } ) }}"
+                                class="text-gray-700 hover:text-terracota-600 transition-colors font-medium">
+                                {{ category.name }}
+                            </a>
+                            <!-- Mega Menu (à compléter avec les sous-catégories) -->
+                            <div class="absolute hidden group-hover:block w-48 bg-white shadow-lg rounded-lg p-4">
+                                <!-- Sous-catégories ici -->
+                            </div>
                         </div>
-                    </div>
-                    {% endfor %}
-                </nav>
+                        {% endfor %}
+                    </nav>
 
-                <!-- User Actions -->
-                <div class="flex items-center space-x-4">
-                    {% if app.user %}
-                    <div class="relative group">
-                        <a href="{{ path('app_account') }}"
-                            class="flex items-center text-gray-700 hover:text-terracota-600">
+                    <!-- User Actions -->
+                    <div class="flex items-center space-x-4">
+                        {% if app.user %}
+                        <div class="relative group">
+                            <a href="{{ path('app_account') }}"
+                                class="flex items-center text-gray-700 hover:text-terracota-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                <span class="ml-1">{{ app.user.firstname }}</span>
+                            </a>
+                        </div>
+                        {% else %}
+                        <a href="{{ path('app_login') }}" class="text-gray-700 hover:text-terracota-600">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                            <span class="ml-1">{{ app.user.firstname }}</span>
+                        </a>
+                        {% endif %}
+
+                        <a href="{{ path('app_cart') }}" class="relative text-gray-700 hover:text-terracota-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            {% if fullCartQuantity > 0 %}
+                            <span
+                                class="absolute -top-2 -right-2 bg-terracota-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                                {{ fullCartQuantity }}
+                            </span>
+                            {% endif %}
                         </a>
                     </div>
-                    {% else %}
-                    <a href="{{ path('app_login') }}" class="text-gray-700 hover:text-terracota-600">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </a>
-                    {% endif %}
+                </div>
+            </div>
+        </header>
 
-                    <a href="{{ path('app_cart') }}" class="relative text-gray-700 hover:text-terracota-600">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        {% if fullCartQuantity > 0 %}
-                        <span
-                            class="absolute -top-2 -right-2 bg-terracota-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                            {{ fullCartQuantity }}
-                        </span>
-                        {% endif %}
-                    </a>
+        <!-- Hero Section -->
+        <div class="bg-terracota-100">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h1 class="text-4xl font-extrabold text-terracota-800 sm:text-5xl md:text-6xl">
+                        Les saveurs authentiques <br>
+                        <span class="text-terracota-500">d’Afrique, livrées chez vous.</span>
+                    </h1>
+                    <p
+                        class="mt-3 max-w-md mx-auto text-base text-terracota-700 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                        L’épicerie africaine qui vous rapproche de chez vous.
+                    </p>
+                    <div class="bg-terracota-100 mx-auto mt-8 flex items-center justify-center">
+                        <div class="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative overflow-hidden">
+                            <img src="/assets/logo-4.png" alt="Logo O Village Shop"
+                                class="w-full h-full object-contain absolute inset-0" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <div class="bg-terracota-100">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl font-extrabold text-terracota-800 sm:text-5xl md:text-6xl">
-                    Les saveurs authentiques <br>
-                    <span class="text-terracota-500">d’Afrique, livrées chez vous.</span>
-                </h1>
-                <p
-                    class="mt-3 max-w-md mx-auto text-base text-terracota-700 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                    L’épicerie africaine qui vous rapproche de chez vous.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <main class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Flash Messages -->
-            {% for label, messages in app.flashes %}
-            {% for message in messages %}
-            <div class="mb-8 p-4 bg-terracota-100 border-l-4 border-terracota-500 text-terracota-700">
-                {{ message }}
-            </div>
-            {% endfor %}
-            {% endfor %}
-
-            {% block body %}{% endblock %}
-        </div>
-    </main>
-
-    <!-- Newsletter -->
-    <section class="bg-terracota-800 text-terracota-50 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-4">Restez connecté</h2>
-            <p class="text-terracota-200 mb-6">Recevez nos dernières nouveautés et offres spéciales</p>
-            <form class="max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Votre email" class="flex-1 rounded-lg px-4 py-2 text-gray-900">
-                <button
-                    class="bg-terracota-500 hover:bg-terracota-600 text-white px-6 py-2 rounded-lg transition-colors">
-                    S'inscrire
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-terracota-900 text-terracota-100">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-bold mb-4">O Village</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Notre histoire</a></li>
-                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Contact</a></li>
-                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Blog</a></li>
-                    </ul>
-                </div>
-
-                {% for category in allCategories|slice(0, 3) %}
-                <div>
-                    <h3 class="text-lg font-bold mb-4">{{ category.name }}</h3>
-                    <ul class="space-y-2">
-                        <!-- Sous-catégories ici -->
-                        <li><a href="#" class="hover:text-terracota-400 transition-colors">Produits phares</a></li>
-                    </ul>
+        <!-- Main Content -->
+        <main class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Flash Messages -->
+                {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                <div class="mb-8 p-4 bg-terracota-100 border-l-4 border-terracota-500 text-terracota-700">
+                    {{ message }}
                 </div>
                 {% endfor %}
+                {% endfor %}
 
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Suivez-nous</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="hover:text-terracota-400 transition-colors">
-                            <i data-feather="facebook"></i>
-                        </a>
-                        <a href="#" class="hover:text-terracota-400 transition-colors">
-                            <i data-feather="instagram"></i>
-                        </a>
-                        <a href="#" class="hover:text-terracota-400 transition-colors">
-                            <i data-feather="youtube"></i>
-                        </a>
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+
+        <!-- Newsletter -->
+        <section class="bg-terracota-800 text-terracota-50 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold mb-4">Restez connecté</h2>
+                <p class="text-terracota-200 mb-6">Recevez nos dernières nouveautés et offres spéciales</p>
+                <form class="max-w-md mx-auto flex gap-4">
+                    <input type="email" placeholder="Votre email" class="flex-1 rounded-lg px-4 py-2 text-gray-900">
+                    <button
+                        class="bg-terracota-500 hover:bg-terracota-600 text-white px-6 py-2 rounded-lg transition-colors">
+                        S'inscrire
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-terracota-900 text-terracota-100">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">O Village</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-terracota-400 transition-colors">Notre histoire</a></li>
+                            <li><a href="#" class="hover:text-terracota-400 transition-colors">Contact</a></li>
+                            <li><a href="#" class="hover:text-terracota-400 transition-colors">Blog</a></li>
+                        </ul>
+                    </div>
+
+                    {% for category in allCategories|slice(0, 3) %}
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">{{ category.name }}</h3>
+                        <ul class="space-y-2">
+                            <!-- Sous-catégories ici -->
+                            <li><a href="#" class="hover:text-terracota-400 transition-colors">Produits phares</a></li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Suivez-nous</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="hover:text-terracota-400 transition-colors">
+                                <i data-feather="facebook"></i>
+                            </a>
+                            <a href="#" class="hover:text-terracota-400 transition-colors">
+                                <i data-feather="instagram"></i>
+                            </a>
+                            <a href="#" class="hover:text-terracota-400 transition-colors">
+                                <i data-feather="youtube"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-12 pt-8 border-t border-terracota-800 text-center">
-                <p>&copy; {{ "now"|date("Y") }} O Village - Tous droits réservés</p>
+                <div class="mt-12 pt-8 border-t border-terracota-800 text-center">
+                    <p>&copy; {{ "now"|date("Y") }} O Village - Tous droits réservés</p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
