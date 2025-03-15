@@ -1,0 +1,65 @@
+{# tailwindcss Sliding pagination control implementation #}
+{% if pageCount > 1 %}
+<div class="inline-block">
+    <div class="flex items-baseline flex-row border border-terracota-200 rounded-lg w-auto shadow-sm">
+        {% if first is defined and current != first %}
+        <span
+            class="bg-white text-terracota-600 px-3 py-2 border-r border-terracota-200 hover:bg-terracota-50 transition-colors">
+            <a href="{{ path(route, query|merge({(pageParameterName): first})) }}" class="flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                </svg>
+                Premier
+            </a>
+        </span>
+        {% endif %}
+
+        {% if previous is defined %}
+        <span
+            class="bg-white text-terracota-600 px-3 py-2 border-r border-terracota-200 hover:bg-terracota-50 transition-colors">
+            <a rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}"
+                class="flex items-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+        </span>
+        {% endif %}
+
+        {% for page in pagesInRange %}
+        {% if page != current %}
+        <span
+            class="bg-white text-terracota-600 px-4 py-2 border-r border-terracota-200 hover:bg-terracota-50 transition-colors">
+            <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+        </span>
+        {% else %}
+        <span class="bg-terracota-500 text-white px-4 py-2 font-medium border-r border-terracota-200">{{ page }}</span>
+        {% endif %}
+        {% endfor %}
+
+        {% if next is defined %}
+        <span
+            class="bg-white text-terracota-600 px-3 py-2 border-r border-terracota-200 hover:bg-terracota-50 transition-colors">
+            <a rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}" class="flex items-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </span>
+        {% endif %}
+
+        {% if last is defined and current != last %}
+        <span class="bg-white text-terracota-600 px-3 py-2 hover:bg-terracota-50 transition-colors">
+            <a href="{{ path(route, query|merge({(pageParameterName): last})) }}" class="flex items-center">
+                Dernier
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                </svg>
+            </a>
+        </span>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

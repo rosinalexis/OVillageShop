@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,7 +23,17 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-//    /**
+    public function getSearchInCategoryQuery(Category $category, string $term)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.category = :category')
+            ->andWhere('p.name LIKE :term')
+            ->setParameter('category', $category)
+            ->setParameter('term', '%' . $term . '%')
+            ->getQuery();
+    }
+
+    //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
 //    public function findByExampleField($value): array
@@ -36,7 +48,7 @@ class ProductRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Product
+    //    public function findOneBySomeField($value): ?Product
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

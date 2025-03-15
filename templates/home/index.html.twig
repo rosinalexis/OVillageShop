@@ -1,6 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
+{% extends 'base.html.twig' %} {% block body %}
 <!-- Hero Carousel -->
 <div class="relative overflow-hidden">
     <div class="absolute inset-0 z-0">
@@ -8,7 +6,7 @@
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out {% if key != 0 %}opacity-0{% endif %}"
             data-carousel-item="{{ key }}">
             <img src="/uploads/{{ header.illustration }}" class="w-full h-full object-cover object-center"
-                alt="{{ header.title }}">
+                alt="{{ header.title }}" />
             <div class="absolute inset-0 bg-terracota-900/40"></div>
         </div>
         {% endfor %}
@@ -28,7 +26,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {% for key,header in headers %}
             <div class="{% if key != 0 %}hidden{% endif %} space-y-6 text-white" data-carousel-content="{{ key }}">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold">{{ header.title }}</h1>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold">
+                    {{ header.title }}
+                </h1>
                 <p class="text-xl max-w-2xl mx-auto">{{ header.content }}</p>
                 <a href="{{ header.buttonLink }}"
                     class="inline-block px-8 py-3 bg-terracota-600 hover:bg-terracota-700 text-white font-medium rounded-lg transition-colors">
@@ -43,23 +43,26 @@
 <!-- Featured Products -->
 <section class="py-16 bg-terracota-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center text-terracota-800 mb-12">Nos produits phares</h2>
+        <h2 class="text-3xl font-bold text-center text-terracota-800 mb-12">
+            Nos produits phares
+        </h2>
 
         <div class="grid md:grid-cols-3 gap-8">
             {% for product in productsInHomepage %}
             <div class="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                 <div class="aspect-square overflow-hidden rounded-t-xl">
-                    <!-- <img src="/uploads/{{ product.illustration }}" -->
-                    <img src="{{ product.illustration }}"
+                    <img src="/uploads/{{ product.illustration }}"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                        alt="{{ product.name }}">
+                        alt="{{ product.name }}" />
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold text-terracota-700">{{ product.name }}</h3>
+                    <h3 class="text-xl font-semibold text-terracota-700">
+                        {{ product.name }}
+                    </h3>
                     <div class="mt-2 text-terracota-600 prose prose-sm">
-                        {{ product.description|raw }}
+                        {{ product.description|raw|u.truncate(40, '...', false) }}
                     </div>
-                    <a href="{{ path('app_product', { slug : product.slug } ) }}"
+                    <a href="{{ path('app_product', { slug: product.slug }) }}"
                         class="mt-4 inline-block px-4 py-2 bg-terracota-100 hover:bg-terracota-200 text-terracota-700 rounded-md transition-colors">
                         Découvrir
                     </a>
@@ -75,42 +78,49 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         <div class="flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2">
-                <img src="https://placehold.co/600x400" class="w-full h-96 object-cover rounded-xl shadow-lg"
-                    alt="Artisanat local">
+                <img src="/assets/home-3.jpg" class="w-full h-96 object-cover rounded-xl shadow-lg"
+                    alt="Artisanat local" />
             </div>
             <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Saveurs d’Afrique</h2>
+                <h2 class="text-3xl font-bold text-terracota-800 mb-4">
+                    Saveurs d’Afrique
+                </h2>
                 <p class="text-lg text-terracota-600 leading-relaxed">
-                    Découvrez des produits authentiques issus de savoir-faire traditionnels, transmis de génération en
-                    génération pour une cuisine riche en goûts et en émotions.
+                    Découvrez des produits authentiques issus de savoir-faire
+                    traditionnels, transmis de génération en génération pour une cuisine
+                    riche en goûts et en émotions.
                 </p>
             </div>
         </div>
 
         <div class="flex flex-col md:flex-row-reverse items-center gap-12">
             <div class="md:w-1/2">
-                <img src="https://placehold.co/600x400" class="w-full h-96 object-cover rounded-xl shadow-lg"
-                    alt="Matériaux naturels">
+                <img src="/assets/home-2.jpg" class="w-full h-96 object-cover rounded-xl shadow-lg"
+                    alt="Matériaux naturels" />
             </div>
             <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Ingrédients 100% naturels</h2>
+                <h2 class="text-3xl font-bold text-terracota-800 mb-4">
+                    Ingrédients 100% naturels
+                </h2>
                 <p class="text-lg text-terracota-600 leading-relaxed">
-                    Des produits africains sélectionnés avec soin, cultivés dans le respect des traditions pour
-                    préserver toute leur richesse et leur saveur.
+                    Des produits africains sélectionnés avec soin, cultivés dans le
+                    respect des traditions pour préserver toute leur richesse et leur
+                    saveur.
                 </p>
             </div>
         </div>
 
         <div class="flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2">
-                <img src="https://placehold.co/600x400" class="w-full h-96 object-cover rounded-xl shadow-lg"
-                    alt="Communauté">
+                <img src="/assets/home-1.jpg" class="w-full h-96 object-cover rounded-xl shadow-lg" alt="Communauté" />
             </div>
             <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold text-terracota-800 mb-4">Un savoir-faire préservé</h2>
+                <h2 class="text-3xl font-bold text-terracota-800 mb-4">
+                    Un savoir-faire préservé
+                </h2>
                 <p class="text-lg text-terracota-600 leading-relaxed">
-                    Encouragez une agriculture et une production respectueuses, héritées des traditions africaines et
-                    transmises avec passion.
+                    Encouragez une agriculture et une production respectueuses, héritées
+                    des traditions africaines et transmises avec passion.
                 </p>
             </div>
         </div>

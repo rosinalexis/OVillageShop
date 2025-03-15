@@ -16,14 +16,34 @@
             </div>
         </div>
 
+        <!-- Barre de recherche -->
+        <div class="mb-8 max-w-2xl mx-auto">
+            <form action="{{ path('app_category', {slug: category.slug}) }}" method="GET" class="flex gap-2">
+                <div class="flex-1 relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-terracota-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" name="q" placeholder="Rechercher des produits..."
+                        class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-terracota-300 focus:border-terracota-400 border-terracota-200">
+                </div>
+                <button type="submit"
+                    class="px-4 py-2 bg-terracota-500 text-white rounded-lg hover:bg-terracota-600 transition-colors whitespace-nowrap">
+                    Rechercher
+                </button>
+            </form>
+        </div>
+
         <!-- Grille des produits -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {% for product in category.products %}
+            {% for product in products %}
             <a href="{{ path('app_product', { slug : product.slug } ) }}"
                 class="group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
                 <!-- Image du produit -->
                 <div class="aspect-square overflow-hidden">
-                    <img src="{{ product.illustration }}" alt="{{ product.name }}"
+                    <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}"
                         class="w-full h-full object-cover transform transition-transform group-hover:scale-105">
                 </div>
 
@@ -38,6 +58,9 @@
                 </div>
             </a>
             {% endfor %}
+        </div>
+        <div class="mt-8">
+            {{ knp_pagination_render(products) }}
         </div>
     </div>
 </div>

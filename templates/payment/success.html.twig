@@ -1,10 +1,63 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container my-5 text-center">
-        <img src="/assets/img/sac-de-courses.png" alt="Commande confirmée">
-        <h1>Merci pour votre commande</h1>
+<div class="min-h-screen bg-terracota-50 py-12">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-lg p-8 sm:p-12 text-center space-y-8">
+            <!-- Icône animée -->
+            <div class="animate-bounce mx-auto w-32 h-32">
+                <img src="/assets/img/sac-de-courses.png" alt="Commande confirmée" class="w-full h-full object-contain">
+            </div>
 
-        <a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}" class="btn btn-success">Consulter ma commande</a>
+            <!-- Contenu texte -->
+            <div class="space-y-4">
+                <!-- Titre principal -->
+                <h1 class="text-3xl sm:text-4xl font-bold text-terracota-800">
+                    Merci pour votre confiance !
+                </h1>
+
+                <!-- Sous-titre -->
+                <p class="text-terracota-600 text-lg">
+                    Votre commande n°{{ order.id }} a bien été enregistrée.
+                </p>
+
+                <!-- Message de confirmation -->
+                <div class="inline-flex items-center bg-terracota-50 rounded-full px-6 py-2">
+                    <svg class="w-5 h-5 mr-2 text-terracota-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-terracota-700">Paiement confirmé</span>
+                </div>
+            </div>
+
+            <!-- Bouton de suivi -->
+            <a href="{{ path('app_account_order', { 'id_order' : order.id }) }}"
+                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-terracota-600 hover:bg-terracota-700 transition-colors duration-200">
+                Suivre ma commande
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </a>
+
+            <!-- Retour à l'accueil -->
+            <div class="pt-8 border-t border-terracota-100">
+                <a href="{{ path('app_home') }}"
+                    class="inline-flex items-center text-terracota-600 hover:text-terracota-700 transition-colors">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+
+        <!-- Message supplémentaire -->
+        <p class="mt-8 text-center text-terracota-600 text-sm">
+            Un email de confirmation vous a été envoyé à<br>
+            <span class="font-medium">{{ app.user.email }}</span>
+        </p>
     </div>
+</div>
 {% endblock %}
