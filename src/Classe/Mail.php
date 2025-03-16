@@ -24,8 +24,8 @@ class Mail
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "ovillage@gmail.com",
-                        'Name' => "O Village Shop"
+                        'Email' => "service@leschosesduvillage.fr",
+                        'Name' => "Ô Village"
                     ],
                     'To' => [
                         [
@@ -33,7 +33,7 @@ class Mail
                             'Name' => $to_name
                         ]
                     ],
-                    'TemplateID' => 5552872,
+                    'TemplateID' => 6814621,
                     'TemplateLanguage' => true,
                     'Subject' => $subject,
                     'Variables' => [

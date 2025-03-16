@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Classe\Mail;
 use App\Repository\HeaderRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

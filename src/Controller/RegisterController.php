@@ -23,6 +23,7 @@ class RegisterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles(['ROLE_USER']);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -36,7 +37,7 @@ class RegisterController extends AbstractController
             $vars = [
                 'firstname' => $user->getFirstname(),
             ];
-            $mail->send($user->getEmail(), $user->getFirstname().' '.$user->getLastname(), "Bienvenue sur La Boutique Française", "welcome.html", $vars);
+            $mail->send($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname(), "Bienvenue sur Ô Village", "welcome.html", $vars);
 
             return $this->redirectToRoute('app_login');
         }

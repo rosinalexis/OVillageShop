@@ -1,16 +1,15 @@
-
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container my-5">
-        <div class="small-bloc">
-            <h1>Mot de passe oublié</h1>
+<div class="container my-5">
+    <div class="small-bloc">
+        <h1>Mot de passe oublié</h1>
 
-            {{ form(forgotPasswordForm) }}
+        {{ form(forgotPasswordForm) }}
 
-            <br/>
+        <br />
 
-            Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a>
-        </div>
+        Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a>
     </div>
+</div>
 {% endblock %}

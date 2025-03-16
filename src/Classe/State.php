@@ -20,5 +20,5 @@ class State
             'email_subject' => 'Commande annulée',
             'email_template' => 'order_state_5.html',
         ],
-        ];
+    ];
 }
