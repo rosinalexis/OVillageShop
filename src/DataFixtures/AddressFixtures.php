@@ -32,16 +32,6 @@ class AddressFixtures extends Fixture implements DependentFixtureInterface
                 'country' => 'Côte d\'Ivoire',
                 'phone' => '+225 05 6789 1234',
                 'user' => 1
-            ],
-            [
-                'firstname' => 'Mohamed',
-                'lastname' => 'Koné',
-                'address' => '789 Boulevard de la Paix',
-                'postal' => '24300',
-                'city' => 'Bamako',
-                'country' => 'Mali',
-                'phone' => '+223 65 432 1098',
-                'user' => 2
             ]
         ];
 

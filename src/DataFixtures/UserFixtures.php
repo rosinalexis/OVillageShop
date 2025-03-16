@@ -33,7 +33,7 @@ class UserFixtures extends Fixture
         $this->addReference('user_0', $admin); // Ajout de référence pour l'admin
 
         // Création de plusieurs utilisateurs
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i < 2; $i++) {
             $user = new User();
             $user->setEmail($faker->unique()->email);
             $user->setFirstname($faker->firstName);
